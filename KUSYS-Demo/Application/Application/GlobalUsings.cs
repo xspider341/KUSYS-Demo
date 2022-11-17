@@ -1,0 +1,12 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
+global using Domain.Response;
+global using MediatR;
+global using Domain.Request;
+global using Application.Contracts.Abstract;
+global using AutoMapper;
+global using Domain.Entities;
+global using Microsoft.Extensions.Logging;
