@@ -1,4 +1,6 @@
 ﻿
+using Application.Features.Command.Course;
+
 namespace Application.Features.Command.Student
 {
     public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand, StudentResponse>
@@ -21,6 +23,7 @@ namespace Application.Features.Command.Student
             if (entity is null || entity.Status == 2)
                 throw new NotImplementedException();
 
+            _mapper.Map(request, entity, typeof(UpdateStudentCommand), typeof(Domain.Entities.Student));
             await _StudentRepository.UpdateAsync(entity);
             response = _mapper.Map<StudentResponse>(entity);
             return response;

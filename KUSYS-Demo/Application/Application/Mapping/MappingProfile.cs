@@ -12,6 +12,10 @@ namespace Application.Mapping
                    .ForMember(dest => dest.Status, opt => opt.MapFrom(src => 1))
                 .ForMember(dest => dest.CreateDate, opt => opt.MapFrom(src => DateTime.Now.Date));
 
+            CreateMap<Course, UpdateCourseCommand>()
+               .ReverseMap()
+               .ForMember(dest => dest.UpdateDate, opt => opt.MapFrom(src => DateTime.Now.Date));
+
             CreateMap<Course, CourseResponse>().ReverseMap();
 
 
@@ -19,6 +23,12 @@ namespace Application.Mapping
                 .ReverseMap()
                   .ForMember(dest => dest.Status, opt => opt.MapFrom(src => 1))
                 .ForMember(dest => dest.CreateDate, opt => opt.MapFrom(src => DateTime.Now.Date));
+
+            CreateMap<Student, StudentResponse>().ReverseMap();
+
+            CreateMap<Student, UpdateStudentCommand>()
+               .ReverseMap()
+               .ForMember(dest => dest.UpdateDate, opt => opt.MapFrom(src => DateTime.Now.Date));
 
             CreateMap<Student, StudentResponse>().ReverseMap();
         }

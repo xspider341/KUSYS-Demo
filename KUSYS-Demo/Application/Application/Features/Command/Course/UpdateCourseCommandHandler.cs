@@ -21,6 +21,7 @@ namespace Application.Features.Command.Course
             if (entity is null || entity.Status == 2)
                 throw new NotImplementedException();
 
+            _mapper.Map(request, entity, typeof(UpdateCourseCommand), typeof(Domain.Entities.Course));
             await _courseRepository.UpdateAsync(entity);
             response = _mapper.Map<CourseResponse>(entity);
             return response;

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using HttpClient;
 
 namespace Web.API.HttpClient.Base
 {
@@ -35,23 +36,23 @@ namespace Web.API.HttpClient.Base
             client.BaseAddress = new Uri(address);
         }
 
-        //public async Task<TContent> GetJsonAsync<TContent>(string requestUri)
-        //{
-        //    var responseMessage = await client.GetAsync(requestUri);
-        //    if (responseMessage.IsSuccessStatusCode)
-        //        return await responseMessage.ReadJsonAsync<TContent>();
-        //    return default;
-        //}
+        public async Task<TContent> GetJsonAsync<TContent>(string requestUri)
+        {
+            var responseMessage = await client.GetAsync(requestUri);
+            if (responseMessage.IsSuccessStatusCode)
+                return await responseMessage.ReadJsonAsync<TContent>();
+            return default;
+        }
 
-        //public async Task<HttpResponseMessage> PostJsonAsync(string requestUri, object data)
-        //{
-        //    var request = new HttpRequestMessage(HttpMethod.Post, requestUri)
-        //    {
-        //        Content = new JsonStringContent(data)
-        //    };
+        public async Task<HttpResponseMessage> PostJsonAsync(string requestUri, object data)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, requestUri)
+            {
+                Content = new JsonStringContent(data)
+            };
 
-        //    return await client.SendAsync(request);
-        //}
+            return await client.SendAsync(request);
+        }
 
         public Task<HttpResponseMessage> PostAsyncWithParameters(string requestUri, object data, string contentType = "application/x-www-form-urlencoded")
         {
@@ -65,25 +66,25 @@ namespace Web.API.HttpClient.Base
             return client.SendAsync(request);
         }
 
-        //public Task<HttpResponseMessage> PutJsonAsync(string requestUri, object data)
-        //{
-        //    var request = new HttpRequestMessage(HttpMethod.Put, requestUri)
-        //    {
-        //        Content = new JsonStringContent(data)
-        //    };
+        public Task<HttpResponseMessage> PutJsonAsync(string requestUri, object data)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Put, requestUri)
+            {
+                Content = new JsonStringContent(data)
+            };
 
-        //    return client.SendAsync(request);
-        //}
+            return client.SendAsync(request);
+        }
 
-        //public Task<HttpResponseMessage> PatchJsonAsync(string requestUri, object data)
-        //{
-        //    var request = new HttpRequestMessage(HttpMethod.Patch, requestUri)
-        //    {
-        //        Content = new JsonStringContent(data)
-        //    };
+        public Task<HttpResponseMessage> PatchJsonAsync(string requestUri, object data)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Patch, requestUri)
+            {
+                Content = new JsonStringContent(data)
+            };
 
-        //    return client.SendAsync(request);
-        //}
+            return client.SendAsync(request);
+        }
 
         public Task<HttpResponseMessage> DeleteAsync<TContent>(string url)
         {
@@ -91,15 +92,15 @@ namespace Web.API.HttpClient.Base
             return client.SendAsync(request);
         }
 
-        //public Task<HttpResponseMessage> DeleteAsync<TContent>(string url, object data)
-        //{
-        //    var request = new HttpRequestMessage(HttpMethod.Delete, url)
-        //    {
-        //        Content = new JsonStringContent(data)
-        //    };
+        public Task<HttpResponseMessage> DeleteAsync<TContent>(string url, object data)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, url)
+            {
+                Content = new JsonStringContent(data)
+            };
 
-        //    return client.SendAsync(request);
-        //}
+            return client.SendAsync(request);
+        }
 
         public async Task<TContent> ReadJsonAsync<TContent>(HttpResponseMessage httpResponseMessage)
         {

@@ -30,7 +30,7 @@ namespace Web.API.Controllers
             var result = await _mediator.Send(command);
             return result;
         }
-        [HttpPatch(Name = "UpdateCourse")]
+        [HttpPut(Name = "UpdateCourse")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<CourseResponse>> UpdateCourse([FromBody] UpdateCourseCommand command)
         {

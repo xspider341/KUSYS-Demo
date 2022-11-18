@@ -1,0 +1,9 @@
+﻿global using Microsoft.Extensions.Configuration;
+global using Domain.Response;
+global using Web.API.HttpClient.Base;
+global using Newtonsoft.Json;
+global using Web.API.HttpClient.Base;
+global using Domain.Request;
+global using System.Net.Http;
+global using Microsoft.Extensions.Configuration;
+global using Domain.Response;
