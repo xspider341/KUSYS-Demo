@@ -16,12 +16,10 @@ namespace Application.Features.Command.Student
 
         public async Task<StudentResponse> Handle(UpdateStudentCommand request, CancellationToken cancellationToken)
         {
-            var response = new StudentResponse();
+            StudentResponse response = new();
             var entity = _StudentRepository.GetByIdAsync(request.Id).Result;
-            if (entity is null)
-            {
+            if (entity is null || entity.Status == 2)
                 throw new NotImplementedException();
-            }
 
             await _StudentRepository.UpdateAsync(entity);
             response = _mapper.Map<StudentResponse>(entity);

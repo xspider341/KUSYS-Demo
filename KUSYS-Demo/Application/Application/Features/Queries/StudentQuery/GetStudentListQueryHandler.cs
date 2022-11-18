@@ -14,7 +14,7 @@ namespace Application.Features.Queries.StudentQuery
 
         public async Task<List<StudentResponse>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
         {
-            var response = new List<StudentResponse>();
+            List<StudentResponse> response = new ();
             var entity = _StudentRepository.GetAllAsync(e => e.Status == 1).Result;
             response = _mapper.Map<List<StudentResponse>>(entity);
             return response;

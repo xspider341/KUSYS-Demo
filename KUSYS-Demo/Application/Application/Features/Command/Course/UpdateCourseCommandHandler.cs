@@ -16,13 +16,11 @@ namespace Application.Features.Command.Course
 
         public async Task<CourseResponse> Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
         {
-            var response = new CourseResponse();
+            CourseResponse response = new ();
             var entity = _courseRepository.GetByIdAsync(request.Id).Result;
-            if (entity == null)
-            {
+            if (entity is null || entity.Status == 2)
                 throw new NotImplementedException();
-            }
-            entity.Status = 3;
+
             await _courseRepository.UpdateAsync(entity);
             response = _mapper.Map<CourseResponse>(entity);
             return response;

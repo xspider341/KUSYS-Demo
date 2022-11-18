@@ -16,7 +16,7 @@ namespace Application.Features.Command.Student
 
         public async Task<StudentResponse> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
-            var response = new StudentResponse();
+            StudentResponse response = new();
             var entity = _mapper.Map<Domain.Entities.Student>(request);
             await _studentRepository.AddAsync(entity);
             response = _mapper.Map<StudentResponse>(entity);

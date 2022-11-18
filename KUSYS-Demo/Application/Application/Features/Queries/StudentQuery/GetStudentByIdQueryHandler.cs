@@ -13,9 +13,9 @@ namespace Application.Features.Queries.StudentQuery
         }
         public async Task<StudentResponse> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
         {
-            var response = new StudentResponse();
+            StudentResponse response = new ();
             var entity = _StudentRepository.GetByIdAsync(request.Id).Result;
-            if (entity is null && entity.Status is 2)
+            if (entity is null || entity.Status is 2)
                 throw new NotImplementedException();
 
             response = _mapper.Map<StudentResponse>(entity);

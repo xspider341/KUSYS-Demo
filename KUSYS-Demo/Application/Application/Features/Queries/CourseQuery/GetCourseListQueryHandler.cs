@@ -14,8 +14,8 @@ namespace Application.Features.Queries.CourseQuery
 
         public async Task<List<CourseResponse>> Handle(GetCourseListQuery request, CancellationToken cancellationToken)
         {
-            var response = new List<CourseResponse>();
-            var entity = _courseRepository.GetAllAsync(e => e.Status==1).Result;
+            List<CourseResponse> response = new();
+            var entity = _courseRepository.GetAllAsync(e => e.Status == 1).Result;
 
             response = _mapper.Map<List<CourseResponse>>(entity);
             return response;

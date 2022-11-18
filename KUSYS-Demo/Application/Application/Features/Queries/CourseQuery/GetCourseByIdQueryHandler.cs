@@ -15,11 +15,11 @@ namespace Application.Features.Queries.CourseQuery
         }
         public async Task<CourseResponse> Handle(GetCourseByIdQuery request, CancellationToken cancellationToken)
         {
-            var response = new CourseResponse();
+            CourseResponse response = new();
             var entity = _courseRepository.GetByIdAsync(request.Id).Result;
-            if (entity == null && entity.Status==2)
+            if (entity is null || entity.Status == 2)
                 throw new NotImplementedException();
-            
+
             response = _mapper.Map<CourseResponse>(entity);
             return response;
         }

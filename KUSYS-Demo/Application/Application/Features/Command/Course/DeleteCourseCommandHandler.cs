@@ -17,11 +17,9 @@ namespace Application.Features.Command.Course
         {
             var response = new CourseResponse();
             var entity = _courseRepository.GetByIdAsync(request.Id).Result;
-            if (entity == null)
-            {
+            if (entity is null || entity.Status == 2)
                 throw new NotImplementedException();
 
-            }
             entity.Status = 2;
             await _courseRepository.DeleteAsync(entity);
             response = _mapper.Map<CourseResponse>(entity);

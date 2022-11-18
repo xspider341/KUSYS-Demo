@@ -15,12 +15,11 @@ namespace Application.Features.Command.Student
         }
         public async Task<StudentResponse> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
         {
-            var response = new StudentResponse();
+            StudentResponse response = new ();
             var entity = _StudentRepository.GetByIdAsync(request.Id).Result;
-            if (entity == null)
-            {
+            if (entity is null || entity.Status == 2)
                 throw new NotImplementedException();
-            }
+
             entity.Status = 2;
             await _StudentRepository.DeleteAsync(entity);
             response = _mapper.Map<StudentResponse>(entity);

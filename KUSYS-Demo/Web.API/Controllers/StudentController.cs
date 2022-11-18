@@ -1,12 +1,4 @@
-﻿using Application.Features.Command.Student;
-using Application.Features.Queries.StudentQuery;
-using Domain.Response;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Xml.Linq;
+﻿
 
 namespace Web.API.Controllers
 {
