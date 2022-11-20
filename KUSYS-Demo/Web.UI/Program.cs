@@ -1,7 +1,30 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login";
+                    options.AccessDeniedPath = "/Denied";
+                    options.Events = new CookieAuthenticationEvents()
+                    {
+                        OnSigningIn = async context =>
+                        {
+                            await Task.CompletedTask;
+                        },
+                        OnSignedIn = async context =>
+                        {
+                            await Task.CompletedTask;
+                        },
+                        OnValidatePrincipal = async context =>
+                        {
+                            await Task.CompletedTask;
+                        }
+                    };
+                });
 
 var app = builder.Build();
 
@@ -18,6 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

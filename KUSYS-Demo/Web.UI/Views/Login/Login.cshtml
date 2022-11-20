@@ -1,0 +1,25 @@
+﻿@{
+    /*
+    ViewData["Title"] = "Login";
+    DeviceInformationAttribute info;
+    switch (ViewBag.Role)
+    {
+        case 1:
+            info = Enums.Admin.GetAttribute<DeviceInformationAttribute>();
+            break;
+        case 2:
+            info = BilancoEnums.User.GetAttribute < DeviceInformationAttribute > ();
+            break;
+        
+        default:
+            break;
+    }*/
+
+}
+
+
+<form action="/login" method="post">
+    <input type="text" name="username" placeholder="username"/>
+    <input type="password" name="password" placeholder="password"/>
+    <input type="submit" value="login" />
+</form>

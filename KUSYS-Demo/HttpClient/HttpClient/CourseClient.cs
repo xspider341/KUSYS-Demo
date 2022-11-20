@@ -33,7 +33,7 @@ namespace Web.API.HttpClient
         }
         public async Task<List<CourseResponse>?> CourseGetAll()
         {
-            var response = await this.GetJsonAsync<List<CourseResponse>>(ApiConstants.CourseGetAll);
+            var response = await this.GetJsonAsync<List<CourseResponse>>(ApiConstants.CoursesGetAll);
             return response;
         }
 

@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "StudentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>StudentList</h1>
+
+
+<table class="table">
+    
+</table>
+@* 
+    <td>
+                    @Html.ActionLink("Edit","EditStudent","Student",new{id=item.StudentId},new{@class="btn btn-outline-warning btn-sm"})
+                    <button class="btn btn-outline-info btn-sm" onclick="OpenDetail(@item.StudentId)">Details</button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="DeleteStudent(@item.StudentId,'@item.FirstName'+ ' ' +'@item.LastName')">Delete</button>
+                </td>
+*@
+<button type="button" class="btn btn-primary" id="openmodal">
+    Launch demo modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalbody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    fetch("https://localhost:7173/api/Student/GetAll")
+   
+    // Converting received data to JSON
+    .then(response => response.json())
+    .then(json => {
+  
+        // Create a variable to store HTML
+            let li = `<tr><th>ID</th><th>First Name</th><th>lastName</th></tr>`;
+       
+        // Loop through each data and add a table row
+        json.forEach(student => {
+            li += `<tr>
+                <td>${student.id} </td>
+                <td>${student.firstName}</td>
+                <td>${student.lastName}</td>
+
+            </tr>`;
+        });
+  
+    // Display result
+            document.getElementById("table").innerHTML = li;
+});
+
+    function OpenDetail(id) {
+        var myModal = new bootstrap.Modal($("#exampleModal"), {
+            keyboard: false
+        })
+
+        $.ajax({
+            url: "@Url.Action("StudentDetails","Student")",
+            type: "GET",
+            data: { id: id },
+            dataType: 'html',
+            success: function (data) {
+                debugger;
+                $("#modalbody").html(data);
+
+            }
+        });
+
+        myModal.show();
+    }
+
+    function DeleteStudent(id, student) {
+        debugger;
+        var isAllow = window.confirm(student + " kişisini silinecek.");
+
+        if (isAllow) {
+            $.ajax({
+                url: "@Url.Action("DeleteStudent","Student")",
+                type: "DELETE",
+                data: { id: id },
+                success: function (data) {
+
+                    if (!data.success) {
+                        alert(data.message);
+                    }
+                    else {
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+    }
+
+</script>

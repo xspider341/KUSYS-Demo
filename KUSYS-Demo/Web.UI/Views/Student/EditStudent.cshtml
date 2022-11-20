@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Edit Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit Student</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="EditStudent">
+            <div class="form-group">
+                <label id="StudentId" class="control-label"></label>
+                <input id="StudentId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label id="FirstName" class="control-label"></label>
+                <input id="FirstName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label id="LastName" class="control-label"></label>
+                <input id="LastName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label id="BirthDate" class="control-label"></label>
+                <input id="BirthDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label id="CourseId" class="control-label"></label>
+                <input id="CourseId" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <div class="form-check form-switch" style="margin-top: 15px;">
+                    <input id="IsUser" class="form-check-input" style="height:30px; width: 4em;" type="checkbox" onclick="IsUserChange()">
+                    <label class="form-check-label" id="IsUser" style="margin:5px;">Is User</label>
+                </div>
+
+            </div>
+            <div id="userarea" style="display:none;">
+                <div class="form-group">
+                    <label id="UserName" class="control-label"></label>
+                    <input id="UserName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label id="Password" class="control-label"></label>
+                    <input id="Password" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a id="studentslist">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+
+    }
+    }
+<script>
+    $(function () {
+        var isuser = '@Model.IsUser';
+        debugger;
+        if (isuser == 'True') {
+            $("#userarea").show();
+        }
+    });
+    function IsUserChange() {
+        $("#userarea").toggle();
+    }
+</script>
